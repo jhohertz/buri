@@ -90,3 +90,5 @@ turbine_clusters:
 
 monitoring_riemann: False
 monitoring_cloudwatch: False
+cassandra_enable_riemann_report: False
+cassandra_stargate: False
