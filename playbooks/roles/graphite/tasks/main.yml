@@ -61,6 +61,6 @@
   when: image_build
   
 - name: Start apache2 service
-  command: service apache2 start
+  command: service apache2 restart
   when: not image_build
 
