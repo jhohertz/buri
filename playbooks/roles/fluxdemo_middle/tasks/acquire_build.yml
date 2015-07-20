@@ -15,6 +15,12 @@
   register: git_clone
   when: fluxdemo_middle_build_source
 
+- name: Copy javadoc disable patch
+  copy: src=disable-javadoc.patch dest=/tmp/disable-javadoc.patch
+
+- name: Disable javadoc from build
+  shell: 'cd /tmp/fluxdemo_middle_build ; cat /tmp/disable-javadoc.patch | patch -p1'
+
 - name: Run build
   command: chdir=/tmp/fluxdemo_middle_build ./gradlew clean assemble
   when: fluxdemo_middle_build_source and git_clone.changed

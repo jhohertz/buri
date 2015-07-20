@@ -15,6 +15,12 @@
   register: git_clone
   when: turbine_build_source
 
+- name: Copy javadoc disable patch
+  copy: src=disable-javadoc.patch dest=/tmp/disable-javadoc.patch
+
+- name: Disable javadoc from build
+  shell: 'cd /tmp/turbine_build ; cat /tmp/disable-javadoc.patch | patch -p1'
+
 - name: Run build
   command: chdir=/tmp/turbine_build ./gradlew clean assemble
   when: turbine_build_source and git_clone.changed

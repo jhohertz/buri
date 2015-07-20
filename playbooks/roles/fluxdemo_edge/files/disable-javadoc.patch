@@ -1,0 +1,17 @@
+diff --git a/gradle/convention.gradle b/gradle/convention.gradle
+index c4658fc..0844c19 100644
+--- a/gradle/convention.gradle
++++ b/gradle/convention.gradle
+@@ -43,9 +43,9 @@ subprojects { project ->
+             // Weird Gradle quirk where type will be used for the extension, but only for sources
+             type 'jar'
+         }
+-        javadoc(javadocJar) {
+-            type 'javadoc'
+-        }
++        //javadoc(javadocJar) {
++        //    type 'javadoc'
++        //}
+     }
+
+     configurations {
