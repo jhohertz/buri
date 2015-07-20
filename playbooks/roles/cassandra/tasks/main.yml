@@ -115,17 +115,21 @@
   command: update-rc.d cassandra disable
   when: image_build
 
-- name: If cassandra is running drain
-  shell: '(netstat -tunlp|grep ":9042" && {{ cassandra_home }}/bin/nodetool drain) || true'
-  when: not image_build
+- name: Enable Cassandra service on boot (Not Priam managed)
+  command: update-rc.d cassandra enable
+  when: image_build
 
-- name: Stop Cassandra service
-  command: service cassandra stop
-  when: not image_build
-  
-#- name: Start Cassandra service
-#  command: service cassandra start
+#- name: If cassandra is running drain
+#  shell: '(netstat -tunlp|grep ":9042" && {{ cassandra_home }}/bin/nodetool drain) || true'
 #  when: not image_build
+
+#- name: Stop Cassandra service
+#  command: service cassandra stop
+#  when: not image_build
+  
+- name: Start Cassandra service
+  command: service cassandra start
+  when: not image_build
  
 #- name: Wait for cassandra to be up
 #  wait_for: port=7199 delay=20 timeout=120
