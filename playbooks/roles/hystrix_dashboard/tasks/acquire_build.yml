@@ -20,7 +20,7 @@
   when: hystrix_dashboard_build_source and git_clone.changed
 
 - name: Find build version
-  shell: chdir=/tmp/hystrix_dashboard_build cat gradle.properties | grep ^version= | sed 's/^version=//'
+  shell: chdir=/tmp/hystrix_dashboard_build/hystrix-dashboard/build/manifest cat hystrix-dashboard.properties | grep ^Implementation-Version= | sed 's/^Implementation-Version=//'
   register: hystrix_dashboard_version_out
   when: hystrix_dashboard_build_source
 

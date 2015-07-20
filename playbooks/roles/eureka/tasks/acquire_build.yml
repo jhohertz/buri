@@ -26,7 +26,7 @@
   when: eureka_build_source and git_clone.changed
 
 - name: Find build version
-  shell: chdir=/tmp/eureka_build cat gradle.properties | grep ^version= | sed 's/^version=//'
+  shell: chdir=/tmp/eureka_build/eureka-server/build/manifest cat eureka-server.properties | grep ^Implementation-Version= | sed 's/^Implementation-Version=//'
   register: eureka_version_out
   when: eureka_build_source
 
