@@ -32,8 +32,14 @@ Requirements:
 - Vagrant and Virtualbox installed
 - Ansible 1.6.10 installed
 - Vagrant host shell plugin installed, via:
+- An JDK installed (for use of keystore binary)
+- the sshpass executable is available
 
     vagrant plugin install vagrant-host-shell
+
+- Have Buri generate cassandra keys (will not overwrite existing keys)
+
+    ./buri keys_cassandra
 
 - Run from the buri checkout:
 
@@ -49,7 +55,7 @@ This will do all the below setups, letting you skip most of the following sectio
 
 To setup the above configuration:
 
-1. Setup a Ubuntu 14.04 server VM (64-bit), with a user named 'dev' that can sudo with a NOPASSWD rule, and an ssh key. (IE: Ansible friendly). You're going to want the VM in bridged mode, or be you'll be setting up a lot of port forwards to use it. You should give it at least 3GB RAM. Passwordless sudo can be setup by running the following on the VM:
+1. Setup a Ubuntu 14.04 server VM (64-bit), with a user named 'dev' that can sudo with a NOPASSWD rule, and add an ssh key. You're going to want the VM in bridged mode, or be you'll be setting up a lot of port forwards to use it. You should give it at least 4GB RAM. Passwordless sudo can be setup by running the following on the VM:
    ```
    echo 'dev ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/91-dev
    ```
@@ -60,10 +66,10 @@ To setup the above configuration:
    git clone https://github.com/viafoura/buri.git
    ```
 
-3. Make sure you have Ansible 1.6.x installed. You can use a version installed with python-pip, by running:
+3. Make sure you have Ansible 1.6.10 or higher installed. You can use a version installed with python-pip, by running:
 
    ```
-   pip install ansible==1.6.10
+   pip install ansible
    ```
 
    Which will get you the latest version of Ansible. This is the method used when Buri sets up a builder for cloud images. You should probably also install python-dev before running the pip install, you should be able to get all you need via running the following script on Ubuntu:
@@ -80,7 +86,7 @@ To setup the above configuration:
    ./buri fluxdemo <IP-of-your-VM>
    ```
 
-5. Go for a coffee. If all goes well, in 10-20 minutes, ansible should be done. It may take up to 3-5 minutes more, or on reboots of the VM, for everything to fully come up.
+5. Go for a coffee. If all goes well, in 20-30 minutes, ansible should be done. It may take up to 3-5 minutes more, or on reboots of the VM, for everything to fully come up.
 
 ### Testing/Using the Flux-in-a-Box
 
